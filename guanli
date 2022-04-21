@@ -1,0 +1,376 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+typedef struct mate     //创建材料信息结构体
+{int num;              //材料编号
+char name[10];          //材料名称
+float score;            //材料单价
+int innum;              //入库数量
+int outnum;             //出库数量
+char bgname[10];        //保管人
+int intime;             //进货时间
+int outtime;            //出货时间
+char text[50];          //备注
+struct mate *next;      //指针域
+};
+mate* create()//创建链表
+{
+	int a;
+	mate *p,*q,*head=NULL;
+	p=(mate*)malloc(sizeof(struct mate));//给p分配空间
+	q=(mate*)malloc(sizeof(struct mate));//给q分配空间
+	head=(mate*)malloc(sizeof(struct mate));//给head分配空间
+	printf("请输入材料的编号\n");
+	scanf("%d",&p->num); 
+	printf("请输入材料的名称\n");
+	scanf("%s",p->name);
+	printf("请输入材料的单价\n");
+	scanf("%f",&p->score);
+	printf("请输入材料的入库数量\n");
+	scanf("%d",&p->innum);
+	printf("请输入材料的出库数量\n");
+	scanf("%d",&p->outnum);
+	printf("请输入保管人的名字\n");
+	scanf("%s",p->bgname);
+	printf("请输入材料的进货时间\n");
+	scanf("%d",&p->intime);
+	printf("请输入材料的出货时间\n");
+	scanf("%d",&p->outtime);
+	printf("请输入对于该材料的备注\n");
+	scanf("%s",p->text);
+	head->next=p;
+	for(;;){printf("请输入数字，数字小于0时结束输入\n");
+	scanf("%d",&a);
+	if(a<0)
+		break;
+	printf("请输入材料的编号\n");
+	scanf("%d",&q->num); 
+	printf("请输入材料的名称\n");
+	scanf("%s",q->name);
+	printf("请输入材料的单价\n");
+	scanf("%f",&q->score);
+	printf("请输入材料的入库数量\n");
+	scanf("%d",&q->innum);
+	printf("请输入材料的出库数量\n");
+	scanf("%d",&q->outnum);
+	printf("请输入保管人的名字\n");
+	scanf("%s",q->bgname);
+	printf("请输入材料的进货时间\n");
+	scanf("%d",&q->intime);
+	printf("请输入材料的出货时间\n");
+	scanf("%d",&q->outtime);
+	printf("请输入对于该材料的备注\n");
+	scanf("%s",q->text);
+	p->next=q;p=q;}
+	p->next=NULL;
+	return (head);
+}
+mate* create1(mate* head)
+{
+	int a;
+	mate *p,*q,*q1;
+	q1=(mate*)malloc(sizeof(struct mate));
+	p=(mate*)malloc(sizeof(struct mate));
+	for(p=head->next;;p=p->next)
+		if(p->next==NULL)
+			break;
+	for(;p->num>0;)
+	{
+		printf("输入数字，再次进行数据输入，当数字小于0时结束");
+		scanf("%d",&a);
+		if(a<0)
+			break;
+		printf("请输入材料的编号\n");
+		scanf("%d",&q1->num);
+	printf("请输入材料的名称\n");
+	scanf("%s",p->name);
+	printf("请输入材料的单价\n");
+	scanf("%f",&p->score);
+	printf("请输入材料的入库数量\n");
+	scanf("%d",&p->innum);
+	printf("请输入材料的出库数量\n");
+	scanf("%d",&p->outnum);
+	printf("请输入保管人的名字\n");
+	scanf("%s",p->bgname);
+	printf("请输入材料的进货时间\n");
+	scanf("%d",&p->intime);
+	printf("请输入材料的出货时间\n");
+	scanf("%d",&p->outtime);
+	printf("请输入对于该材料的备注\n");
+	scanf("%s",p->text);p->next=q1;
+	p=q1;
+	q1=(mate*)malloc(sizeof(struct mate));
+	}
+	p->next=NULL;return (head);
+}
+void find(mate* head)
+{
+	printf("按照材料编号查找按1\n");
+	printf("按照材料名称查找按2\n");
+	printf("按照材料单价查找按3\n");
+	printf("按照进货时间查找按4\n");
+	printf("按照出货时间查找按5\n");
+	printf("按照保管人查找按6\n");
+	printf("退出查找按0\n");
+	int a,b,c;char z[50];
+	float x;
+	mate *p;
+	p=(mate*)malloc(sizeof(struct mate));
+	for(;;){
+		scanf("%d",&a);
+		if(a==0)
+			break;
+		else
+			switch(a)
+		{case 1:
+		printf("请输入查找材料的编号\n");
+		scanf("%d",&b);
+		for(p=head->next;p!=NULL;p=p->next)
+			{if(p->num==b)
+					 {
+		                 c=p->innum - p->outnum ;
+		                    printf("编号：%d\n 名称：%s\n 单价：%f\n ",p->num,p->name,p->score);
+							printf("入库数量：%d\n 总库存数量：%d\n出库数量：%d\n ",p->innum ,c,p->outnum);
+							printf("保管人：%s\n 进货时间：%d\n 出货时间：%d\n",p->bgname,p->intime,p->outtime); 
+							printf("备注：%s\n",p->text);
+		}}break;
+		case 2:
+			printf("请输入查找材料的名称\n");
+		scanf("%s",&z);
+		for(p=head->next;p!=NULL;p=p->next)
+			{if(strcmp(z,p->name)==0)
+					 {
+		                 c=p->innum - p->outnum ;
+		                    printf("编号：%d\n 名称：%s\n 单价：%f\n ",p->num,p->name,p->score);
+							printf("入库数量：%d\n 总库存数量：%d\n出库数量：%d\n ",p->innum ,c,p->outnum);
+							printf("保管人：%s\n 进货时间：%d\n 出货时间：%d\n",p->bgname,p->intime,p->outtime);
+							printf("备注：%s\n",p->text);
+		}}break;
+		case 3:
+			printf("请输入查找材料的单价\n");
+		scanf("%f",&x);
+		for(p=head->next;p!=NULL;p=p->next)
+			{if(x==p->score)
+					 {
+		                 c=p->innum - p->outnum ;
+		                    printf("编号：%d\n 名称：%s\n 单价：%f\n ",p->num,p->name,p->score);
+							printf("入库数量：%d\n 总库存数量：%d\n出库数量：%d\n ",p->innum ,c,p->outnum);
+							printf("保管人：%s\n 进货时间：%d\n 出货时间：%d\n",p->bgname,p->intime,p->outtime);
+							printf("备注：%s\n",p->text);
+		}}break;
+		case 4:
+			printf("请输入查找材料的进货时间\n");
+		scanf("%d",&b);
+		for(p=head->next;p!=NULL;p=p->next)
+		{if(b==p->intime)
+					 {
+		                 c=p->innum - p->outnum ;
+		                    printf("编号：%d\n 名称：%s\n 单价：%f\n ",p->num,p->name,p->score);
+							printf("入库数量：%d\n 总库存数量：%d\n出库数量：%d\n ",p->innum ,c,p->outnum);
+							printf("保管人：%s\n 进货时间：%d\n 出货时间：%d\n",p->bgname,p->intime,p->outtime); 
+							printf("备注：%s\n",p->text);
+		}}break;
+		case 5:
+			printf("请输入查找材料的出货时间\n");
+		scanf("%d",&b);
+		for(p=head->next;p!=NULL;p=p->next)
+		{if(b==p->outtime)
+					 {
+		                 c=p->innum - p->outnum ;
+		                    printf("编号：%d\n 名称：%s\n 单价：%f\n ",p->num,p->name,p->score);
+							printf("入库数量：%d\n 总库存数量：%d\n出库数量：%d\n ",p->innum ,c,p->outnum);
+							printf("保管人：%s\n 进货时间：%d\n 出货时间：%d\n",p->bgname,p->intime,p->outtime); 
+							printf("备注：%s\n",p->text);
+		}}break;
+		case 6:
+			printf("请输入查找材料的保管人\n");
+		scanf("%s",&z);
+		for(p=head->next;p!=NULL;p=p->next)
+			{if(strcmp(z,p->bgname)==0)
+					 {
+		                 c=p->innum - p->outnum ;
+		                    printf("编号：%d\n 名称：%s\n 单价：%f\n ",p->num,p->name,p->score);
+							printf("入库数量：%d\n 总库存数量：%d\n出库数量：%d\n ",p->innum ,c,p->outnum);
+							printf("保管人：%s\n 进货时间：%d\n 出货时间：%d\n",p->bgname,p->intime,p->outtime); 
+							printf("备注：%s\n",p->text);
+		}}break;
+		}
+	}
+}
+void retire(mate* head)
+{
+	int a,b,c,d,e,f,g;
+	char z[50];
+	mate *p,*q;
+	p=(mate*)malloc(sizeof(struct mate));
+	printf("按照材料的编号或名称查找并修改\n");
+	printf("按照编号查找按1\n");printf("按照名称查找按2\n");
+	scanf("%d",&a);
+	if(a==1)
+	{printf("输入材料的编号\n");
+	scanf("%d",&b);
+	for(p=head->next;p!=NULL;p=p->next)
+	{
+		if(b==p->num)
+			{
+		                 c=p->innum - p->outnum ;
+						 printf("输出已有的材料数据");
+		                    printf("编号：%d\n 名称：%s\n 单价：%f\n ",p->num,p->name,p->score);
+							printf("入库数量：%d\n 总库存数量：%d\n出库数量：%d\n ",p->innum ,c,p->outnum);
+							printf("保管人：%s\n 进货时间：%d\n 出货时间：%d\n",p->bgname,p->intime,p->outtime); 
+							printf("备注：%s\n",p->text);
+							printf("重新输入该材料的信息\n");
+							printf("请输入材料的编号\n");
+	scanf("%d",&p->num);
+	printf("请输入材料的名称\n");
+	scanf("%s",&p->name);
+	printf("请输入材料的单价\n");
+	scanf("%f",&p->score);
+	printf("请输入材料的入库数量\n");
+	scanf("%d",&p->innum);
+	printf("请输入材料的出库数量\n");
+	scanf("%d",&p->outnum);
+	printf("请输入保管人的名字\n");
+	scanf("%s",&p->bgname);
+	printf("请输入材料的进货时间\n");
+	scanf("%d",&p->intime);
+	printf("请输入材料的出货时间\n");
+	scanf("%d",&p->outtime);
+	printf("请输入对于该材料的备注\n");
+	scanf("%s",&p->text);
+		}
+	}
+	}
+	if(a==2)
+		{printf("输入材料的名字\n");
+	scanf("%s",z);
+	for(p=head->next;p!=NULL;p=p->next)
+	{
+		if(strcmp(z,p->name)==0)
+			{
+		                 c=p->innum - p->outnum ;
+						 printf("输出已有的材料数据");
+		                    printf("编号：%d\n 名称：%s\n 单价：%f\n ",p->num,p->name,p->score);
+							printf("入库数量：%d\n 总库存数量：%d\n出库数量：%d\n ",p->innum ,c,p->outnum);
+							printf("保管人：%s\n 进货时间：%d\n 出货时间：%d\n",p->bgname,p->intime,p->outtime); 
+							printf("备注：%s\n",p->text);
+							printf("重新输入该材料的信息\n");
+							printf("请输入材料的编号\n");
+	scanf("%d",&p->num);
+	printf("请输入材料的名称\n");
+	scanf("%s",&p->name);
+	printf("请输入材料的单价\n");
+	scanf("%f",&p->score);
+	printf("请输入材料的入库数量\n");
+	scanf("%d",&p->innum);
+	printf("请输入材料的出库数量\n");
+	scanf("%d",&p->outnum);
+	printf("请输入保管人的名字\n");
+	scanf("%s",&p->bgname);
+	printf("请输入材料的进货时间\n");
+	scanf("%d",&p->intime);
+	printf("请输入材料的出货时间\n");
+	scanf("%d",&p->outtime);
+	printf("请输入对于该材料的备注\n");
+	scanf("%s",&p->text);
+		}
+	}
+	}
+}
+void print(mate* head)
+{
+	int a,i=0;
+mate *p;
+p=(mate*)malloc(sizeof(struct mate));
+for(p=head->next;p!=NULL;p=p->next)
+{
+	a=p->innum-p->outnum;
+	if(a<0)
+		{printf("error");
+	                        break;}
+	 printf("编号：%d\n 名称：%s\n 单价：%f\n ",p->num,p->name,p->score);
+	 printf("入库数量：%d\n 总库存数量：%d\n出库数量：%d\n ",p->innum ,a,p->outnum);
+	 printf("保管人：%s\n 进货时间：%d\n 出货时间：%d\n",p->bgname,p->intime,p->outtime);
+	 printf("备注：%s\n",p->text);
+}
+}
+int main(void){
+    mate *head;
+	printf("******************************\n");
+	printf("*****欢迎进入材料管理系统*****\n");
+	printf("*******按住任意键进入*********");
+	getchar();
+	printf("显示所有材料信息按1\n");
+	printf("查找材料信息按2\n");
+	printf("录入材料信息按3\n");
+	printf("修改材料信息按4\n");
+	printf("退出程序按-1\n");
+	int a,b;
+	for(;;)
+	{
+		scanf("%d",&a);
+		if(a==-1)
+			break;
+		else
+			switch(a)
+		{
+		case 1:
+		     print(head);
+			 system("pause");
+		     system("cls");
+		     printf("显示所有材料信息按1\n");
+		     printf("查找材料信息按2\n");
+		     printf("录入材料信息按3\n");
+		     printf("修改材料信息按4\n");
+		     printf("退出程序按-1\n");break;
+		case 2:find(head);
+			system("pause");
+			system("cls");
+			printf("显示所有材料信息按1\n");
+			printf("查找材料信息按2\n");
+			printf("录入材料信息按3\n");
+			printf("修改材料信息按4\n");
+			printf("退出程序按-1\n");break;
+		case 3:
+			printf("初次输入信息按1，否则按2\n");
+			scanf("%d",&b);
+			if(b==1)
+				head=create();//进行材料的第一次输入
+			else
+				head=create1(head);//在原有的数据基础上进行录入
+			system("cls");
+			printf("显示所有材料信息按1\n");
+	        printf("查找材料信息按2\n");
+	        printf("录入材料信息按3\n");
+	        printf("修改材料信息按4\n");
+	        printf("退出程序按-1\n");break;
+		case 4:
+			retire(head);
+			system("pause");
+			system("cls");
+			printf("显示所有材料信息按1\n");
+			printf("查找材料信息按2\n");
+			printf("录入材料信息按3\n");
+			printf("修改材料信息按4\n");
+			printf("退出程序按-1\n");break;}
+	FILE *fb;
+	mate *file;
+	file=head->next;
+	file=(mate*)malloc(sizeof(struct mate));
+	if(!(fb=fopen("材料管理.txt","a+")))
+	{
+		printf("error");
+	}
+	else
+	{printf("成功存入文件\n");
+	for(file=head;file!=NULL;file=file->next)
+	{fprintf(fb,"%d %s %f %d %d %s %d %d %s",file->num,file->name,
+	file->score,file->innum,file->outnum,file->bgname,file->intime,file->outtime,file->text);
+	}
+	fprintf(fb,"\n");
+	}
+	fclose(fb);
+	}
+	system("pause");
+	return 0;
+}
